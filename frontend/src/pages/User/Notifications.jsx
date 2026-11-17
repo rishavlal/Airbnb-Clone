@@ -8,6 +8,7 @@ import {
   Bug,
   ShieldCheck,
   CalendarCheck,
+  Star,
 } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 import {

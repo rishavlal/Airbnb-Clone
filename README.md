@@ -1,79 +1,71 @@
-# Airbnb-Clone
+# StayFinder — Airbnb-Inspired Property Rental Platform
 
-## Overview
+StayFinder is a full-stack property rental and booking platform inspired by Airbnb. It enables users to discover accommodations, explore property details, manage bookings, and save their favourite listings. Hosts can manage their properties, while administrators have access to platform management features.
 
-StayFinder is a full-stack Airbnb-inspired property rental and booking platform developed as an internship project. The application allows users to browse properties, search for accommodations, view property details, make bookings, save properties to a wishlist, and manage their bookings. Property owners can list and manage their properties through a dedicated host dashboard.
+Developed as part of an internship project.
 
 ## Features
 
-### Authentication
+### Authentication & User Management
 
-- User Sign Up and Login using Clerk
-- Secure authentication and session management
+- User registration and login using Clerk
 - User profile management
-- Protected routes
+- Role-based admin interface
+- User session management
 
-### Property Listings
+### Property Discovery
 
-- Browse available properties
+- Browse property listings
 - Search properties by location
-- Filter properties by price, guests, and amenities
+- Filter listings using available criteria
 - View detailed property information
-- Property image gallery
+- Property image galleries
 
-### Booking System
+### Booking Management
 
 - Select check-in and check-out dates
-- View booking summary
+- View booking summaries
 - Manage reservations
-- Booking history
+- Access booking history
 
 ### Wishlist
 
-- Save favorite properties
+- Save favourite properties
 - View saved properties
-- Remove properties from wishlist
+- Remove properties from the wishlist
 
 ### Host Dashboard
 
-- Add new properties
-- Edit property details
+- Create and manage property listings
+- Edit property information
 - Upload property images
-- Manage listings
 - View booking requests
 
 ### Admin Dashboard
 
-- Manage users
-- Manage properties
-- Monitor bookings
-- Platform analytics
+- Manage users and properties
+- Review and moderate listings
+- Manage reservations and categories
+- View platform analytics
+- Manage notifications
 
----
+## Technology Stack
 
-## Tech Stack
-
-### Frontend
-
-- React.js
-- Tailwind CSS
-- React Router DOM
-- Clerk Authentication
-
-### Backend
-
-- PHP
-- REST API
-
-### Database
-
-- MySQL
-
-### Authentication
-
-- Clerk
-
----
+| Layer                   | Technologies              |
+| ----------------------- | ------------------------- |
+| Frontend                | React 19, JavaScript      |
+| Styling                 | Tailwind CSS 4, CSS       |
+| Build Tool              | Vite                      |
+| Routing                 | React Router              |
+| Authentication          | Clerk                     |
+| Backend                 | PHP 8.2+, Laravel 12      |
+| Database                | MySQL configuration       |
+| API Communication       | REST APIs, Axios          |
+| Image Management        | Cloudinary                |
+| Real-time Communication | Laravel Reverb, Pusher    |
+| Maps                    | Leaflet, React Leaflet    |
+| Data Visualization      | Recharts                  |
+| Icons                   | Lucide React, React Icons |
 
 ## Project Structure
 
@@ -81,133 +73,149 @@ StayFinder is a full-stack Airbnb-inspired property rental and booking platform 
 Airbnb-Clone/
 │
 ├── frontend/
+│   ├── public/
 │   ├── src/
+│   │   ├── api/
 │   │   ├── assets/
 │   │   ├── components/
-│   │   ├── pages/
+│   │   ├── config/
+│   │   ├── context/
 │   │   ├── hooks/
-│   │   ├── services/
+│   │   ├── pages/
 │   │   ├── App.jsx
 │   │   └── main.jsx
-│   │
-│   ├── public/
-│   └── package.json
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── backend/
+│   ├── app/
+│   │   ├── Http/
+│   │   ├── Models/
+│   │   └── Services/
+│   ├── bootstrap/
 │   ├── config/
-│   ├── api/
-│   ├── uploads/
-│   ├── models/
-│   └── database/
+│   ├── database/
+│   ├── public/
+│   ├── resources/
+│   ├── routes/
+│   ├── storage/
+│   ├── tests/
+│   ├── composer.json
+│   └── .env.example
 │
-└── database/
-    └── stayfinder.sql
+├── .gitignore
+├── README.md
+└── CHANGES.txt
 ```
 
----
+## Getting Started
 
-## Database Tables
+### Prerequisites
 
-### Users
+Install the following before running the project:
 
-- id
-- clerk_user_id
-- name
-- email
-- role
+- Node.js and npm
+- PHP 8.2 or later
+- Composer
+- MySQL
+- A Clerk account and application
+- Cloudinary credentials for image upload functionality
 
-### Properties
-
-- id
-- host_id
-- title
-- description
-- location
-- price_per_night
-- guests
-- bedrooms
-- bathrooms
-- image_url
-
-### Bookings
-
-- id
-- property_id
-- user_id
-- check_in
-- check_out
-- total_price
-- status
-
-### Reviews
-
-- id
-- property_id
-- user_id
-- rating
-- comment
-
-### Wishlists
-
-- id
-- user_id
-- property_id
-
----
-
-## Installation
-
-### Clone Repository
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Student-Abhishekkumar/Airbnb-Clone.git
+git clone https://github.com/rishavlal/Airbnb-Clone.git
 cd Airbnb-Clone
 ```
 
-### Frontend Setup
+### 2. Backend Setup
+
+```bash
+cd backend
+composer install
+```
+
+Create your environment file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Generate the Laravel application key:
+
+```bash
+php artisan key:generate
+```
+
+Configure your database and required service credentials in `backend/.env`.
+
+Run database migrations:
+
+```bash
+php artisan migrate
+```
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+### 3. Frontend Setup
+
+Open another terminal:
 
 ```bash
 cd frontend
 npm install
+```
+
+Create a frontend `.env` file and configure the required variables:
+
+```env
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+VITE_API_BASE=http://127.0.0.1:8000
+```
+
+Start the frontend:
+
+```bash
 npm run dev
 ```
 
-### Backend Setup
+Open the local URL displayed by Vite in your browser.
 
-1. Place backend folder inside XAMPP htdocs.
-2. Start Apache and MySQL.
-3. Import database/stayfinder.sql into MySQL.
-4. Update database credentials in config file.
+## Environment Configuration
 
----
+Keep all actual credentials private. Never commit `.env` files, Clerk secret keys, Cloudinary API secrets, database passwords, or other private credentials.
 
-## Future Enhancements
+Use `.env.example` files to document the required configuration variables.
 
-- Online payments
-- Google Maps integration
-- Property availability calendar
-- Real-time chat
-- Email notifications
-- Mobile application
-- AI-based property recommendations
+## My Internship Contributions
 
----
+My individual frontend contributions included:
+
+- Designed and implemented the Home page using React and CSS.
+- Designed and implemented the Experiences page using React and CSS.
+- Contributed to the frontend development of the Services page.
+
+The remaining application features were developed as part of the wider project.
 
 ## Learning Outcomes
 
-- Full-Stack Development
-- REST API Development
-- Authentication using Clerk
-- Database Design and Management
-- React Component Architecture
-- State Management
-- CRUD Operations
-- Responsive UI Design
-
----
+- React-based frontend development
+- Component-based UI architecture
+- REST API integration
+- Laravel backend fundamentals
+- Clerk authentication integration
+- Database-driven application development
+- Git and GitHub collaboration
+- Full-stack application structure
 
 ## Project Status
 
-🚧 Under Development
+Under development and undergoing improvements for documentation, maintainability, and deployment readiness.
 
-This project is being developed as an internship project to demonstrate full-stack web development skills and modern web application architecture.
+## Acknowledgements
+
+Developed as part of an internship project in collaboration with the project team. Credit to the original project contributors.
